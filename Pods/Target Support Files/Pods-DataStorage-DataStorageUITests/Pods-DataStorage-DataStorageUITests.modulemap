@@ -1,0 +1,6 @@
+framework module Pods_DataStorage_DataStorageUITests {
+  umbrella header "Pods-DataStorage-DataStorageUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
