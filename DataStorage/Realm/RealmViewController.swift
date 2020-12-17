@@ -8,6 +8,8 @@ class ToDoListItem: Object {
 
 class RealmViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var isEditingMode = false
+    
     @IBOutlet var table: UITableView!
     
     private let realm = try! Realm()
@@ -32,11 +34,16 @@ class RealmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+            return true
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
         let item = data[indexPath.row]
         
-        guard let vc = storyboard?.instantiateViewController(identifier: "view") as? ViewViewController else {
+        guard let vc = storyboard?.instantiateViewController(identifier: "view") as? ViewViewController  else {
             return
         }
         
@@ -62,9 +69,19 @@ class RealmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    @IBAction func doneButton(_ sender: UIBarButtonItem) {
+        isEditingMode = !isEditingMode
+        table.setEditing(!isEditingMode, animated: true)
+    }
+    
     func refresh() {
         data = realm.objects(ToDoListItem.self).map({ $0 })
         table.reloadData()
     }
+    
+//    func changeState(at item: Int) -> Bool {
+//        data[item] = !(data[item] as! Bool)
+//        return data[item] as! Bool
+//    }
 
 }

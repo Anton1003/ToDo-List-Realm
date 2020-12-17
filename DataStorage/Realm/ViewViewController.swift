@@ -24,8 +24,19 @@ class ViewViewController: UIViewController {
         itemLabel.text = item?.item
         dateLabel.text = ViewViewController.dateFormatter.string(from: item!.date)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(didTapDelet))
-       
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButton)), UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(didTapDelet))]
+        
+    }
+    
+    @objc private func doneButton() {
+      
+
+//        realm.beginWrite()
+//        realm.add(doneItem)
+//        try! realm.commitWrite()
+
+        
+   //     navigationController?.popToRootViewController(animated: true)
     }
     
     @objc private func didTapDelet() {

@@ -31,11 +31,23 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="To Do List" id="2PP-qn-dKP">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="MA2-LX-Va0">
-                            <connections>
-                                <action selector="didTapAppButton:" destination="KWh-nq-RCO" id="eFa-up-tdy"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="MA2-LX-Va0">
+                                <connections>
+                                    <action selector="didTapAppButton:" destination="KWh-nq-RCO" id="eFa-up-tdy"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" id="MFl-Jl-adu" userLabel="Done">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="I33-cR-6oK">
+                                    <rect key="frame" x="261.5" y="7" width="25" height="24"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Edit"/>
+                                </button>
+                                <connections>
+                                    <action selector="doneButton:" destination="KWh-nq-RCO" id="kVT-gO-mfd"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="table" destination="B30-UZ-Bv5" id="nmq-ll-w5L"/>
