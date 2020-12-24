@@ -29,14 +29,20 @@ class ViewViewController: UIViewController {
     }
     
     @objc private func doneButton() {
-      
-
-//        realm.beginWrite()
-//        realm.add(doneItem)
-//        try! realm.commitWrite()
+        if let doneItem = self.item {
+            let attributeString: NSMutableAttributedString = NSMutableAttributedString(string: itemLabel.text!)
+            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+            itemLabel.attributedText = attributeString
+        } else {
+            return
+        }
+    
+        realm.beginWrite()
+        
+        try! realm.commitWrite()
 
         
-   //     navigationController?.popToRootViewController(animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     @objc private func didTapDelet() {

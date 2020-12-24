@@ -4,6 +4,7 @@ import UIKit
 class ToDoListItem: Object {
     @objc dynamic var item: String = ""
     @objc dynamic var date: Date = Date()
+    //@objc dynamic var done = false
 }
 
 class RealmViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -31,6 +32,8 @@ class RealmViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = data[indexPath.row].item
+        
+        //cell.accessoryType = data[indexPath.row].done == true ? .checkmark : .none
         return cell
     }
     
@@ -69,19 +72,10 @@ class RealmViewController: UIViewController, UITableViewDelegate, UITableViewDat
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @IBAction func doneButton(_ sender: UIBarButtonItem) {
-        isEditingMode = !isEditingMode
-        table.setEditing(!isEditingMode, animated: true)
-    }
     
     func refresh() {
         data = realm.objects(ToDoListItem.self).map({ $0 })
         table.reloadData()
     }
-    
-//    func changeState(at item: Int) -> Bool {
-//        data[item] = !(data[item] as! Bool)
-//        return data[item] as! Bool
-//    }
 
 }
